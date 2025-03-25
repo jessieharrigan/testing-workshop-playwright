@@ -62,4 +62,53 @@ test.describe("Happy Path", () => {
         await Helper.checkCurrentPage('https://www.gov.uk/calculate-your-holiday-entitlement/y/irregular-hours-and-part-year/2000-01-01', page);
     });
 
+    test("Page 4 - Holiday entitlement selection", async({page}) => {
+        //Go to page
+        await page.goto("https://www.gov.uk/calculate-your-holiday-entitlement/y/irregular-hours-and-part-year/2000-01-01");
+            
+        const DaysWorkedPerWeek = async () => {
+            //Select the radio button labelled "Yes"
+            await page.locator('id=response-0').click();
+                        
+            // Clicking the "Continue" button
+            Helper.clickContinueButton(page);
+            }
+        
+        DaysWorkedPerWeek();        
+        
+        // Assert that the current URL is the expected URL
+        await Helper.checkCurrentPage('https://www.gov.uk/calculate-your-holiday-entitlement/y/irregular-hours-and-part-year/2000-01-01/days-worked-per-week', page);
+     });
+
+     test(" Page 5 - Parameter for working out holiday", async({page}) => {
+        //Go to page
+        await page.goto("https://www.gov.uk/calculate-your-holiday-entitlement/y/irregular-hours-and-part-year/2000-01-01/days-worked-per-week");
+            
+        const ForAFullLeaveYear = async () => {
+            //Select the radio button labelled "Yes"
+            await page.locator('id=response-0').click();
+                        
+            // Clicking the "Continue" button
+            Helper.clickContinueButton(page);
+            }
+        
+        ForAFullLeaveYear();        
+        
+        // Assert that the current URL is the expected URL
+        await Helper.checkCurrentPage('https://www.gov.uk/calculate-your-holiday-entitlement/y/irregular-hours-and-part-year/2000-01-01/days-worked-per-week/full-year', page);
+     });
+     
+     test("Page 6 - Number of days worked per week", async({page}) => {
+        //Go to page
+        await page.goto("https://www.gov.uk/calculate-your-holiday-entitlement/y/irregular-hours-and-part-year/2000-01-01/days-worked-per-week/full-year");
+        
+        //Fill in 
+        await page.locator('input#response').fill('7');
+
+        // Clicking the "Continue" button
+        await page.getByText('Continue').click();
+
+        // Assert that the current URL is the expected URL
+        await Helper.checkCurrentPage('https://www.gov.uk/calculate-your-holiday-entitlement/y/irregular-hours-and-part-year/2000-01-01/days-worked-per-week/full-year/7.0', page);
+    });
 });
