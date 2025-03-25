@@ -27,5 +27,17 @@ test('StartButton redirects to the correct page', async ({ page }) => {
 //We should be on the 'Does the employee work, irregular hours' page - testing our happy path
 test("Test page confirms previous selections", async({page}) => {
     //double check correct page
-    await Helper.checkCurrentPage('https://www.gov.uk/calculate-your-holiday-entitlement/y', page);
+   
+    await page.goto("https://www.gov.uk/calculate-your-holiday-entitlement/y");
+
+    await Helper.checkCurrentPage('https://www.gov.uk/calculate-your-holiday-entitlement/y', page); 
+   
+    //Select the radio button labelled "Yes"
+    await page.locator('id=response-0').click();
+    // Clicking the "Continue" button
+    await page.getByText('Continue').click();
+    // Redirection to irregular hours and part year page
+    await Helper.checkCurrentPage("https://www.gov.uk/calculate-your-holiday-entitlement/y/irregular-hours-and-part-year", page);
 });
+
+
