@@ -112,7 +112,7 @@ test.describe("Happy Path", () => {
         await Helper.checkCurrentPage('https://www.gov.uk/calculate-your-holiday-entitlement/y/irregular-hours-and-part-year/2000-01-01/days-worked-per-week/full-year/7.0', page);
     });
 
-    test("Page 7 - assert correct text is present given all of the previous questions in happy path.", async ({ page }) => {
+    test("Page 7 - assert correct number of AL days is present given all of the previous questions in happy path.", async ({ page }) => {
         // Go to the page
         await page.goto("https://www.gov.uk/calculate-your-holiday-entitlement/y/irregular-hours-and-part-year/2000-01-01/days-worked-per-week/full-year/7.0");
     
@@ -127,6 +127,45 @@ test.describe("Happy Path", () => {
         }
     });
     
-    
+    test("Page 7 - assert correct option appears after question", async ({ page }) => {
+        await page.goto("https://www.gov.uk/calculate-your-holiday-entitlement/y/irregular-hours-and-part-year/2000-01-01/days-worked-per-week/full-year/7.0");
+      
+        // Find the question block
+       const question1 = page.getByText("Does the employee work irregular hours or for part of the year?", { exact: true });
+      
+        // Find the first following element with text "Yes" inside the same container or right after
+        const yesAnswer = question1.locator("xpath=following-sibling::*").getByText("Yes", { exact: true });
+      
+        // Assert the text is correct
+        await expect(yesAnswer).toHaveText("Yes");
 
+        // Find the question block
+        const question2 = page.getByText("When does the leave year start?", { exact: true });
+      
+        // Find the first following element with text "Yes" inside the same container or right after
+        const DateAnswer = question2.locator("xpath=following-sibling::*").getByText("1 January 2000", { exact: true });
+      
+        // Assert the text is correct
+        await expect(DateAnswer).toHaveText("1 January 2000");
+
+        // Find the question block
+        const question3 = page.getByText("Is the holiday entitlement based on:", { exact: true });
+      
+        // Find the first following element with text "Yes" inside the same container or right after
+        const holidayEntitlement = question3.locator("xpath=following-sibling::*").getByText("days worked per week", { exact: true });
+       
+        // Assert the text is correct
+        await expect(holidayEntitlement).toHaveText("days worked per week");
+        
+        // Find the question block
+        const question4 = page.getByText("Do you want to work out holiday:", { exact: true });
+      
+        // Find the first following element with text "Yes" inside the same container or right after
+        const workoutholiday = question4.locator("xpath=following-sibling::*").getByText("for a full leave year", { exact: true });
+       
+        // Assert the text is correct
+        await expect(workoutholiday).toHaveText("for a full leave year")
+
+      });
+      
 });
