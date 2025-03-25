@@ -111,4 +111,22 @@ test.describe("Happy Path", () => {
         // Assert that the current URL is the expected URL
         await Helper.checkCurrentPage('https://www.gov.uk/calculate-your-holiday-entitlement/y/irregular-hours-and-part-year/2000-01-01/days-worked-per-week/full-year/7.0', page);
     });
+
+    test("Page 7 - assert correct text is present given all of the previous questions in happy path.", async ({ page }) => {
+        // Go to the page
+        await page.goto("https://www.gov.uk/calculate-your-holiday-entitlement/y/irregular-hours-and-part-year/2000-01-01/days-worked-per-week/full-year/7.0");
+    
+        // Extract the text content of the body
+        const bodyText = await page.locator('body').textContent();
+
+        // Assert that "28 days" is included in the body text
+        if (bodyText) {
+            expect(bodyText).toContain('28 days');
+        } else {
+            throw new Error('Body text is empty');
+        }
+    });
+    
+    
+
 });
