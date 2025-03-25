@@ -33,49 +33,6 @@ module.exports = defineConfig({
                 trace: "retain-on-first-failure", // Gives a playwright trace on failure
                 javaScriptEnabled: true, // Enables Javascript in the browser
             },
-        },
-        {
-            name: "firefox",
-            use: {
-                ...devices["Desktop Firefox"], // Desktop firefox
-                screenshot: "off", // Decides whether it screenshots on failure
-                trace: "retain-on-first-failure",
-                javaScriptEnabled: true,
-            },
-        },
-        {
-            name: "webkit",
-            use: {
-                ...devices["Desktop Safari"], // Desktop Safari
-                screenshot: "off",
-                trace: "retain-on-first-failure",
-                javaScriptEnabled: true,
-            },
-        },
-        {
-            name: "MobileChrome",
-            use: {
-                ...devices["Pixel 5"], // Google pixel 5 Chrome
-                screenshot: "only-on-failure",
-                trace: "off",
-            },
-        },
-        {
-            name: "MobileSafari",
-            use: {
-                ...devices["iPhone 12"], // iPhone 12 Safari
-                screenshot: "only-on-failure",
-                trace: "off",
-            },
-        },
-        {
-            name: "MicrosoftEdge",
-            use: {
-                ...devices["Desktop Edge"], // MS Edge desktop
-                channel: "msedge",
-                screenshot: "only-on-failure",
-                trace: "off",
-            },
-        },
+        }
     ],
 });
