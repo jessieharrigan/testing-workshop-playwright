@@ -2,10 +2,10 @@
   "name": "testing-workshop-playwright",
   "packageManager": "yarn@4.6.0",
   "devDependencies": {
-    "@playwright/test": "^1.50.1",
-    "@types/node": "^22.13.4",
-    "playwright": "^1.50.1",
-    "typescript": "^5.7.3"
+    "@playwright/test": "^1.56.0",
+    "@types/node": "^24.7.2",
+    "playwright": "^1.56.0",
+    "typescript": "^5.9.3"
   },
   "scripts": {
     "test": "playwright test --project chromium --headed"
