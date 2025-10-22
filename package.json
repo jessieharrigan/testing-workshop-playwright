@@ -1,6 +1,6 @@
 {
   "name": "testing-workshop-playwright",
-  "packageManager": "yarn@4.6.0",
+  "packageManager": "yarn@1.22.22",
   "devDependencies": {
     "@playwright/test": "^1.56.0",
     "@types/node": "^24.7.2",
